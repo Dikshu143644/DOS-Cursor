@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Google Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #070b14;
+  color: #f8fafc;
+  line-height: 1.4;
+  overscroll-behavior: none;
+}
+
+body {
+  background-image: url('bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+button {
+  cursor: pointer;
+  pointer-events: auto;
+  font-family: inherit;
+}
+
+#XRButtonWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+#XRButtonWrapper > * {
+  pointer-events: auto;
+}
+
+#XRButtonWrapper h1 {
+  font-weight: 500;
+  font-size: 2.25rem;
+  margin: 0;
+  color: #fff;
+  letter-spacing: -0.02rem;
+}
+
+.XRButton {
+  background: linear-gradient(135deg, #d4e8ff 50%, #d0a8e3 100%);
+  color: #000;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 18px 38px;
+  min-width: 240px;
+  transition: transform 0.18s ease;
+}
+
+.XRButton:hover {
+  transform: scale(1.02);
+}
+
+/* Top-left minimal spec badge */
+.aircursor-top-badge {
+  position: fixed;
+  top: 14px;
+  left: 16px;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(10, 15, 28, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  pointer-events: none;
+  max-width: min(560px, 68vw);
+}
+
+.aircursor-badge-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f8fafc;
+}
+
+.aircursor-badge-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: #38bdf8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Collapsible Bottom Control Dock (No backdrop-filter over WebGL, no pulse dots) */
+.aircursor-dock-shell {
+  position: fixed;
+  bottom: 10px;
+  left: 64px;
+  right: 12px;
+  z-index: 30;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.aircursor-dock-shell.is-collapsed {
+  transform: translateY(calc(100% + 14px));
+}
+
+.aircursor-dock-shell.is-collapsed .aircursor-dock-toggle {
+  transform: translateY(-50px);
+}
+
+.aircursor-dock-toggle {
+  pointer-events: auto;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(10, 15, 28, 0.94);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.aircursor-dock-toggle:hover {
+  color: #ffffff;
+  border-color: #38bdf8;
+}
+
+.aircursor-dock {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 12px;
+  background: rgba(10, 15, 28, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
+.aircursor-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.dock-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.dock-btn {
+  padding: 4px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(30, 41, 59, 0.85);
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dock-btn:hover {
+  background: rgba(51, 65, 85, 0.95);
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.dock-btn.is-active {
+  background: rgba(14, 165, 233, 0.28);
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.dock-btn.is-offline {
+  border-color: rgba(239, 68, 68, 0.55);
+  color: #fca5a5;
+}
+
+.dock-btn-sm {
+  padding: 4px 7px;
+  font-size: 11px;
+}
+
+.dock-btn-accent {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(52, 211, 153, 0.5);
+  color: #6ee7b7;
+}
+
+.dock-btn-accent:hover {
+  background: rgba(16, 185, 129, 0.34);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(148, 163, 184, 0.25);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+.dock-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.dock-swatch.is-active {
+  border-color: #38bdf8;
+  transform: scale(1.16);
+}
+
+@media (max-width: 720px) {
+  .aircursor-top-badge {
+    max-width: calc(100vw - 24px);
+    left: 12px;
+    top: 10px;
+  }
+  .aircursor-dock-shell {
+    left: 60px;
+    right: 8px;
+    bottom: 10px;
+  }
+  .aircursor-dock {
+    padding: 5px 6px;
+  }
+}
